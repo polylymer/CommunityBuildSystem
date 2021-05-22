@@ -1,0 +1,7 @@
+main: de.hglabor.BuildSystem
+name: BuildSystem
+api-version: 1.16
+version: 0.0.1
+commands:
+  skull:
+  settings:
