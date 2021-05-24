@@ -33,10 +33,11 @@ object JoinQuitListener {
                 player.inventory.setItem(8, settingsItem)
             }
 
-            if (!Settings.gm1) {
-                player.gameMode = GameMode.ADVENTURE
-            } else {
-                player.gameMode = GameMode.CREATIVE
+            when (Settings.gm1) {
+                0 -> player.gameMode = GameMode.CREATIVE
+                1 -> player.gameMode = GameMode.ADVENTURE
+                2 -> player.gameMode = GameMode.SPECTATOR
+                3 -> player.gameMode = GameMode.SURVIVAL
             }
         }
     }

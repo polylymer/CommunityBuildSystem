@@ -2,15 +2,9 @@ package de.hglabor.gui
 
 import de.hglabor.config.Settings
 import net.axay.kspigot.chat.KColors
-import net.axay.kspigot.gui.GUIType
-import net.axay.kspigot.gui.Slots
-import net.axay.kspigot.gui.kSpigotGUI
-import net.axay.kspigot.gui.rectTo
+import net.axay.kspigot.gui.*
 import net.axay.kspigot.items.*
-import org.bukkit.Bukkit
-import org.bukkit.GameMode
 import org.bukkit.Material
-import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 
@@ -25,19 +19,8 @@ class SettingsGUI {
             placeholder(Slots.RowOneSlotOne rectTo Slots.RowThreeSlotNine, itemStack(Material.LIGHT_BLUE_STAINED_GLASS_PANE) { meta { name = null } })
 
             button(Slots.RowTwoSlotTwo, gm()) {
-                if (!Settings.gm1) {
-                    for (players: Player in Bukkit.getOnlinePlayers()) {
-                        players.gameMode = GameMode.CREATIVE
-                        it.player.sendMessage("${KColors.GREEN}Set Gamemode for all Players to ${KColors.GREENYELLOW}Creative Mode")
-                        Settings.gm1 = true
-                    }
-                } else {
-                    for (players: Player in Bukkit.getOnlinePlayers()) {
-                        players.gameMode = GameMode.ADVENTURE
-                        it.player.sendMessage("${KColors.GREEN}Set Gamemode for all Players to ${KColors.GREENYELLOW}Adventure Mode")
-                        Settings.gm1 = false
-                    }
-                }
+                it.player.closeInventory()
+                it.player.openGUI(GamemodeGUI().gui)
                 it.bukkitEvent.currentItem = gm()
             }
 
@@ -73,7 +56,12 @@ class SettingsGUI {
                 name = "${KColors.YELLOW}GAMEMODE"
                 addLore {
                     +""
-                    +"${KColors.GRAY}current: ${if (Settings.gm1) "${KColors.GREEN}CREATIVE" else "${KColors.GREEN}ADVENTURE"}"
+                    when (Settings.gm1) {
+                        0 -> +"${KColors.GRAY}current: ${KColors.GREEN}CREATIVE"
+                        1 -> +"${KColors.GRAY}current: ${KColors.GREEN}ADVENTURE"
+                        2 -> +"${KColors.GRAY}current: ${KColors.GREEN}SPECTATOR"
+                        3 -> +"${KColors.GRAY}current: ${KColors.GREEN}SURVIVAL"
+                    }
                     +""
                     +"${KColors.LIGHTBLUE}Zum Wechseln des Gamemodes"
                     +"${KColors.LIGHTBLUE}für alle Spieler zwischen"

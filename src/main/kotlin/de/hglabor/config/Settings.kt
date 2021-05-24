@@ -1,12 +1,15 @@
 package de.hglabor.config
 
+import de.hglabor.gui.SettingsGUI
+import net.axay.kspigot.gui.openGUI
 import org.bukkit.Difficulty
 import org.bukkit.GameRule
 import org.bukkit.World
+import org.bukkit.entity.Player
 
 object Settings {
 
-    var gm1 = false
+    var gm1 = 1
     var forbiddenItems = true
     var skulls = true
 
@@ -31,5 +34,9 @@ object Settings {
         world.setGameRule(GameRule.FALL_DAMAGE, false)
         world.setGameRule(GameRule.FIRE_DAMAGE, false)
         world.setGameRule(GameRule.DO_PATROL_SPAWNING, false)
+    }
+
+    fun openSettingsGUI(player: Player) {
+        player.openGUI(SettingsGUI().gui)
     }
 }
