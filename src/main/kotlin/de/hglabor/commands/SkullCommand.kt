@@ -1,6 +1,9 @@
 package de.hglabor.commands
 
+import com.google.common.collect.ImmutableMap
 import de.hglabor.config.Settings
+import de.hglabor.localization.Locale.getByPlayer
+import de.hglabor.localization.Localization
 import net.axay.kspigot.chat.KColors
 import org.bukkit.Material
 import org.bukkit.SkullType
@@ -25,8 +28,10 @@ object SkullCommand : CommandExecutor{
                     skull.itemMeta = meta
 
                     sender.inventory.addItem(skull)
-                    sender.sendMessage("added skull to inventory")
+                    sender.sendMessage(Localization.getMessage("buildsystem.addedSkull", ImmutableMap.of("skull", sender.name), getByPlayer(sender)))
                 }
+            } else {
+                sender.sendMessage(Localization.getMessage("buildsystem.skullIsDisabled", getByPlayer(sender)))
             }
         }
         return false

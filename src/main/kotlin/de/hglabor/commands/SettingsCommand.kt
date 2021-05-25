@@ -1,6 +1,8 @@
 package de.hglabor.commands
 
 import de.hglabor.gui.SettingsGUI
+import de.hglabor.localization.Locale.getByPlayer
+import de.hglabor.localization.Localization
 import net.axay.kspigot.gui.openGUI
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -12,6 +14,8 @@ object SettingsCommand : CommandExecutor {
         if (sender is Player) {
             if (sender.isOp) {
                 sender.openGUI(SettingsGUI().gui)
+            } else {
+                sender.sendMessage(Localization.getMessage("buildsystem.noPermission", getByPlayer(sender)))
             }
         }
         return false

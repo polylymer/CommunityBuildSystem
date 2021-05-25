@@ -1,13 +1,16 @@
 package de.hglabor.gui
 
+import com.google.common.collect.ImmutableMap
 import de.hglabor.config.Settings
+import de.hglabor.localization.Locale.getByPlayer
+import de.hglabor.localization.Localization
 import net.axay.kspigot.chat.KColors
+import net.axay.kspigot.extensions.onlinePlayers
 import net.axay.kspigot.gui.*
 import net.axay.kspigot.items.flag
 import net.axay.kspigot.items.itemStack
 import net.axay.kspigot.items.meta
 import net.axay.kspigot.items.name
-import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -29,9 +32,9 @@ class GamemodeGUI {
                     name = "${KColors.YELLOW}GAMEMODE CREATIVE"
                 }
             }) {
-                for (players: Player in Bukkit.getOnlinePlayers()) {
+                for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.CREATIVE
-                    it.player.sendMessage("${KColors.GREEN}Set Gamemode for all Players to ${KColors.GREENYELLOW}Creative Mode")
+                    it.player.sendMessage(Localization.getMessage("buildsystem.settings.updateGamemode", ImmutableMap.of("gamemode", "CREATIVE"), getByPlayer(it.player)))
                     Settings.gm1 = 0
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)
@@ -44,9 +47,9 @@ class GamemodeGUI {
                     name = "${KColors.YELLOW}GAMEMODE ADVENTURE"
                 }
             }) {
-                for (players: Player in Bukkit.getOnlinePlayers()) {
+                for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.ADVENTURE
-                    it.player.sendMessage("${KColors.GREEN}Set Gamemode for all Players to ${KColors.GREENYELLOW}Adventure Mode")
+                    it.player.sendMessage(Localization.getMessage("buildsystem.settings.updateGamemode", ImmutableMap.of("gamemode", "ADVENTURE"), getByPlayer(it.player)))
                     Settings.gm1 = 1
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)
@@ -59,9 +62,9 @@ class GamemodeGUI {
                     name = "${KColors.YELLOW}GAMEMODE SPECTATOR"
                 }
             }) {
-                for (players: Player in Bukkit.getOnlinePlayers()) {
+                for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.SPECTATOR
-                    it.player.sendMessage("${KColors.GREEN}Set Gamemode for all Players to ${KColors.GREENYELLOW}Spectator Mode")
+                    it.player.sendMessage(Localization.getMessage("buildsystem.settings.updateGamemode", ImmutableMap.of("gamemode", "SPECTATOR"), getByPlayer(it.player)))
                     Settings.gm1 = 2
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)
@@ -74,9 +77,9 @@ class GamemodeGUI {
                     name = "${KColors.YELLOW}GAMEMODE SURVIVAL"
                 }
             }) {
-                for (players: Player in Bukkit.getOnlinePlayers()) {
+                for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.SURVIVAL
-                    it.player.sendMessage("${KColors.GREEN}Set Gamemode for all Players to ${KColors.GREENYELLOW}Survival Mode")
+                    it.player.sendMessage(Localization.getMessage("buildsystem.settings.updateGamemode", ImmutableMap.of("gamemode", "SURVIVAL"), getByPlayer(it.player)))
                     Settings.gm1 = 3
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)

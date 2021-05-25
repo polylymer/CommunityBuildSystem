@@ -4,6 +4,8 @@ import de.hglabor.config.Settings
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.gui.*
 import net.axay.kspigot.items.*
+import org.bukkit.Bukkit
+import org.bukkit.GameRule
 import org.bukkit.Material
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
@@ -25,25 +27,43 @@ class SettingsGUI {
             }
 
             button(Slots.RowTwoSlotThree, forbiddenItems()) {
-                if (Settings.forbiddenItems) {
-                    Settings.forbiddenItems = false
-                    it.player.sendMessage("set to false")
-                } else {
-                    Settings.forbiddenItems = true
-                    it.player.sendMessage("set to true")
-                }
+                Settings.forbiddenItems = !Settings.forbiddenItems
                 it.bukkitEvent.currentItem = forbiddenItems()
             }
 
             button(Slots.RowTwoSlotFour, skulls()) {
-                if (Settings.skulls) {
-                    Settings.skulls = false
-                    it.player.sendMessage("set to false")
-                } else {
-                    Settings.skulls = true
-                    it.player.sendMessage("set to true")
-                }
+                Settings.skulls = !Settings.skulls
                 it.bukkitEvent.currentItem = skulls()
+            }
+
+            button(Slots.RowTwoSlotFive, alwaysDay()) {
+                if (Settings.alwaysDay) {
+                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true)
+                    Settings.alwaysDay = false
+                } else {
+                    Bukkit.getWorld("world")?.time = 6000
+                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true)
+                    Settings.alwaysDay = true
+                }
+                it.bukkitEvent.currentItem = alwaysDay()
+            }
+
+            button(Slots.RowTwoSlotSix, antiWeather()) {
+                if (Settings.antiWeather) {
+                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_WEATHER_CYCLE, true)
+                    Settings.antiWeather = false
+                } else {
+                    Bukkit.getWorld("world")?.setStorm(false)
+                    Bukkit.getWorld("world")?.isThundering = false
+                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
+                    Settings.antiWeather = true
+                }
+                it.bukkitEvent.currentItem = antiWeather()
+            }
+
+            button(Slots.RowTwoSlotSeven, opBypass()) {
+                Settings.opBypass = !Settings.opBypass
+                it.bukkitEvent.currentItem = opBypass()
             }
         }
     }
@@ -63,9 +83,7 @@ class SettingsGUI {
                         3 -> +"${KColors.GRAY}current: ${KColors.GREEN}SURVIVAL"
                     }
                     +""
-                    +"${KColors.LIGHTBLUE}Zum Wechseln des Gamemodes"
-                    +"${KColors.LIGHTBLUE}für alle Spieler zwischen"
-                    +"${KColors.LIGHTBLUE}Adventure/Creative"
+                    +"${KColors.LIGHTBLUE}no description"
                 }
             }
         }
@@ -80,16 +98,14 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.forbiddenItems) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}Verbietet das Benutzen von"
-                    +"${KColors.LIGHTBLUE}OP/unnötigen Items"
-                    +"${KColors.LIGHTBLUE}(Netherite, Armorstands, usw.)"
+                    +"${KColors.LIGHTBLUE}no description"
                 }
             }
         }
     }
 
     private fun skulls(): ItemStack {
-        return itemStack(Material.PLAYER_HEAD) {
+        return itemStack(Material.SKELETON_SKULL) {
             meta {
                 flag(ItemFlag.HIDE_ATTRIBUTES)
                 name = "${KColors.YELLOW}SKULLS"
@@ -97,8 +113,52 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.skulls) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}Erlaubt jedem Spieler sich mit"
-                    +"${KColors.LIGHTBLUE}/skull seinen eigenen Kopf zu geben"
+                    +"${KColors.LIGHTBLUE}no description"
+                }
+            }
+        }
+    }
+
+    private fun alwaysDay(): ItemStack {
+        return itemStack(Material.SUNFLOWER) {
+            meta {
+                flag(ItemFlag.HIDE_ATTRIBUTES)
+                name = "${KColors.YELLOW}ALWAYS DAY"
+                addLore {
+                    +""
+                    +"${KColors.GRAY}current: ${if (Settings.alwaysDay) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
+                    +""
+                    +"${KColors.LIGHTBLUE}no description"
+                }
+            }
+        }
+    }
+
+    private fun antiWeather(): ItemStack {
+        return itemStack(Material.NETHER_SPROUTS) {
+            meta {
+                flag(ItemFlag.HIDE_ATTRIBUTES)
+                name = "${KColors.YELLOW}NO BAD WEATHER"
+                addLore {
+                    +""
+                    +"${KColors.GRAY}current: ${if (Settings.antiWeather) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
+                    +""
+                    +"${KColors.LIGHTBLUE}no description"
+                }
+            }
+        }
+    }
+
+    private fun opBypass(): ItemStack {
+        return itemStack(Material.BEACON) {
+            meta {
+                flag(ItemFlag.HIDE_ATTRIBUTES)
+                name = "${KColors.YELLOW}OP BYPASS"
+                addLore {
+                    +""
+                    +"${KColors.GRAY}current: ${if (Settings.opBypass) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
+                    +""
+                    +"${KColors.LIGHTBLUE}currently only join bypass if server is full"
                 }
             }
         }

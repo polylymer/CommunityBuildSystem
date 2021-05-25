@@ -12,15 +12,22 @@ object Settings {
     var gm1 = 1
     var forbiddenItems = true
     var skulls = true
+    var alwaysDay = true
+    var antiWeather = true
+    var opBypass = true
 
     fun setWorldSettings(world: World) {
-        world.time = 6000
-        world.setStorm(false)
-        world.isThundering = false
+        if (alwaysDay) {
+            world.time = 6000
+            world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
+        }
+        if (antiWeather) {
+            world.setStorm(false)
+            world.isThundering = false
+            world.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
+        }
         world.difficulty = Difficulty.PEACEFUL
         world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false)
-        world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
-        world.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
         world.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false)
         world.setGameRule(GameRule.MOB_GRIEFING, false)
         world.setGameRule(GameRule.DO_ENTITY_DROPS, false)

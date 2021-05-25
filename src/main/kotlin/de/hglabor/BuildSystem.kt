@@ -5,6 +5,7 @@ import de.hglabor.commands.SkullCommand
 import de.hglabor.events.InteractListener
 import de.hglabor.events.JoinQuitListener
 import de.hglabor.config.Settings
+import de.hglabor.localization.Localization
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.extensions.broadcast
 import net.axay.kspigot.extensions.bukkit.register
@@ -24,6 +25,7 @@ class BuildSystem : KSpigot() {
 
     override fun startup() {
         Settings.setWorldSettings(Bukkit.getWorld("world")!!)
+        Localization.init()
         JoinQuitListener
         InteractListener
         SkullCommand.register("skull")

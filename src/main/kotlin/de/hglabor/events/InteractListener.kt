@@ -2,7 +2,8 @@ package de.hglabor.events
 
 import de.hglabor.config.Settings
 import de.hglabor.gui.SettingsGUI
-import net.axay.kspigot.chat.KColors
+import de.hglabor.localization.Locale.getByPlayer
+import de.hglabor.localization.Localization
 import net.axay.kspigot.event.listen
 import net.axay.kspigot.extensions.broadcast
 import net.axay.kspigot.extensions.bukkit.actionBar
@@ -35,6 +36,7 @@ object InteractListener {
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("AXE") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("HOE") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("PICKAXE") }.toList())
+        disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("SHOVEL") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("CHESTPLATE") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("LEGGINGS") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("HELMET") }.toList())
@@ -47,15 +49,15 @@ object InteractListener {
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("SPASH_POTION") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("ARROW") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("LINGERING_POTION") }.toList())
-        disabledBlocks.addAll(listOf(Material.DISPENSER, Material.IRON_BLOCK, Material.TNT, Material.CHEST,
-            Material.DIAMOND_BLOCK, Material.FURNACE, Material.ENDER_CHEST, Material.TRAPPED_CHEST,
-            Material.HOPPER, Material.DROPPER, Material.FLINT_AND_STEEL, Material.DIAMOND,
-            Material.IRON_INGOT, Material.NETHERITE_INGOT, Material.NETHERITE_SCRAP, Material.GOLDEN_APPLE,
-            Material.ENCHANTED_GOLDEN_APPLE, Material.PAINTING, Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE,
-            Material.ITEM_FRAME, Material.GOLDEN_CARROT, Material.WITHER_SKELETON_SKULL, Material.WITHER_SKELETON_WALL_SKULL,
-            Material.ARMOR_STAND, Material.END_CRYSTAL, Material.SHIELD, Material.ELYTRA, Material.TOTEM_OF_UNDYING,
-            Material.SHULKER_SHELL, Material.IRON_NUGGET, Material.TRIDENT, Material.CROSSBOW, Material.BARREL,
-            Material.SMOKER, Material.BLAST_FURNACE, Material.NETHERITE_BLOCK, Material.ANCIENT_DEBRIS, Material.COMMAND_BLOCK))
+        disabledBlocks.addAll(listOf(Material.DISPENSER, Material.IRON_BLOCK, Material.TNT, Material.CHEST, Material.SCUTE, Material.STRUCTURE_VOID,
+            Material.DIAMOND_BLOCK, Material.FURNACE, Material.ENDER_CHEST, Material.TRAPPED_CHEST, Material.CONDUIT, Material.BELL, Material.ENDER_EYE,
+            Material.HOPPER, Material.DROPPER, Material.FLINT_AND_STEEL, Material.DIAMOND, Material.BEACON, Material.NAUTILUS_SHELL,
+            Material.IRON_INGOT, Material.NETHERITE_INGOT, Material.NETHERITE_SCRAP, Material.GOLDEN_APPLE, Material.HEART_OF_THE_SEA,
+            Material.ENCHANTED_GOLDEN_APPLE, Material.PAINTING, Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE, Material.NOTE_BLOCK,
+            Material.ITEM_FRAME, Material.GOLDEN_CARROT, Material.WITHER_SKELETON_SKULL, Material.WITHER_SKELETON_WALL_SKULL, Material.STRUCTURE_BLOCK,
+            Material.ARMOR_STAND, Material.END_CRYSTAL, Material.SHIELD, Material.ELYTRA, Material.TOTEM_OF_UNDYING, Material.BREWING_STAND,
+            Material.SHULKER_SHELL, Material.IRON_NUGGET, Material.TRIDENT, Material.CROSSBOW, Material.BARREL, Material.RESPAWN_ANCHOR,
+            Material.SMOKER, Material.BLAST_FURNACE, Material.NETHERITE_BLOCK, Material.ANCIENT_DEBRIS, Material.COMMAND_BLOCK, Material.NETHER_STAR))
 
         listen<PlayerInteractEvent> {
             val player = it.player
@@ -69,7 +71,7 @@ object InteractListener {
 
         listen<PlayerDropItemEvent> {
             it.isCancelled = true
-            it.player.actionBar("${KColors.RED}you can't drop any items")
+            it.player.actionBar(Localization.getMessage("buildsystem.dropItems", getByPlayer(it.player)))
         }
 
         listen<InventoryClickEvent> {
@@ -81,14 +83,12 @@ object InteractListener {
                     } else if (disabledBlocks.contains(it.currentItem!!.type) && Settings.forbiddenItems) {
                         it.isCancelled = true
                         player.inventory.remove(it.currentItem!!)
-                        player.actionBar("${KColors.RED}not allowed")
-                        player.sendMessage("${KColors.RED}not allowed")
+                        player.actionBar(Localization.getMessage("buildsystem.forbiddenItems", getByPlayer(player)))
                     } else if (!(it.cursor == null || it.cursor!!.type == Material.AIR)) {
                         if (disabledBlocks.contains(it.cursor!!.type) && Settings.forbiddenItems) {
                             it.isCancelled = true
                             it.cursor = itemStack(Material.AIR) {}
-                            player.actionBar("${KColors.RED}not allowed (cursor)")
-                            player.sendMessage("${KColors.RED}not allowed (cursor)")
+                            player.actionBar(Localization.getMessage("buildsystem.forbiddenItems", getByPlayer(player)))
                         }
                     }
                 }
@@ -102,7 +102,7 @@ object InteractListener {
             if (Settings.forbiddenItems) {
                 if (disabledBlocks.contains(block.type)) {
                     it.isCancelled = true
-                    player.actionBar("${KColors.RED}not allowed")
+                    player.actionBar(Localization.getMessage("buildsystem.forbiddenItems", getByPlayer(player)))
                 }
             }
         }
