@@ -18,7 +18,7 @@ object SkullCommand : CommandExecutor{
         if (sender is Player) {
             if (Settings.skulls) {
                 if (args.isEmpty()) {
-                    val skull = ItemStack(Material.LEGACY_SKULL_ITEM, 1, SkullType.PLAYER.ordinal.toShort())
+                    val skull = ItemStack(Material.PLAYER_HEAD, 1, SkullType.PLAYER.ordinal.toShort())
                     val meta = skull.itemMeta as SkullMeta
                     meta.setDisplayName("${KColors.LIGHTBLUE}" + sender.name)
                     meta.owner = sender.name
