@@ -51,7 +51,7 @@ object JoinQuitListener {
 
         listen<PlayerLoginEvent> {
             if (Settings.opBypass) {
-                if (it.result == PlayerLoginEvent.Result.KICK_FULL && it.player.isOp) {
+                if (it.result == PlayerLoginEvent.Result.KICK_FULL && it.player.isOp || it.player.hasPermission("group.moderator")) {
                     it.allow()
                 }
             }
