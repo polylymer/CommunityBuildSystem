@@ -37,6 +37,7 @@ object InteractListener {
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("CHESTPLATE") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("LEGGINGS") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("HELMET") }.toList())
+        disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("BOOTS") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("BUCKET") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("MINECART") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("POTION") }.toList())
