@@ -15,6 +15,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockPlaceEvent
 import org.bukkit.event.entity.EntityDamageEvent
+import org.bukkit.event.entity.EntitySpawnEvent
 import org.bukkit.event.entity.FoodLevelChangeEvent
 import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -126,6 +127,10 @@ object InteractListener {
                 broadcast(it.vehicle.type.name)
                 it.isCancelled = true
             }
+        }
+
+        listen<EntitySpawnEvent> {
+            it.isCancelled = true
         }
     }
 }
