@@ -7,6 +7,7 @@ import net.axay.kspigot.event.listen
 import net.axay.kspigot.extensions.broadcast
 import net.axay.kspigot.extensions.bukkit.actionBar
 import net.axay.kspigot.gui.openGUI
+import net.axay.kspigot.items.itemStack
 import net.axay.kspigot.utils.hasMark
 import org.bukkit.Material
 import org.bukkit.entity.Minecart
@@ -79,6 +80,13 @@ object InteractListener {
                         player.inventory.remove(it.currentItem!!)
                         player.actionBar("${KColors.RED}not allowed")
                         player.sendMessage("${KColors.RED}not allowed")
+                    } else if (!(it.cursor == null || it.cursor!!.type == Material.AIR)) {
+                        if (disabledBlocks.contains(it.cursor!!.type) && Settings.forbiddenItems) {
+                            it.isCancelled = true
+                            it.cursor = itemStack(Material.AIR) {}
+                            player.actionBar("${KColors.RED}not allowed (cursor)")
+                            player.sendMessage("${KColors.RED}not allowed (cursor)")
+                        }
                     }
                 }
             }

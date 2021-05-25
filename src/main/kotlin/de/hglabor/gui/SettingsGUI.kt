@@ -50,7 +50,7 @@ class SettingsGUI {
 
 
     private fun gm(): ItemStack {
-        return itemStack(Material.TOTEM_OF_UNDYING) {
+        return itemStack(Material.GRASS_BLOCK) {
             meta {
                 flag(ItemFlag.HIDE_ATTRIBUTES)
                 name = "${KColors.YELLOW}GAMEMODE"
