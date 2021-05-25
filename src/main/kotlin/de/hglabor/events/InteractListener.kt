@@ -21,6 +21,7 @@ import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.event.vehicle.VehicleCreateEvent
 import org.bukkit.event.weather.WeatherChangeEvent
 import java.util.*
@@ -131,6 +132,10 @@ object InteractListener {
         }
 
         listen<EntitySpawnEvent> {
+            it.isCancelled = true
+        }
+
+        listen<PlayerSwapHandItemsEvent> {
             it.isCancelled = true
         }
     }
