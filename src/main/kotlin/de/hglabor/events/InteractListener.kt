@@ -37,7 +37,7 @@ object InteractListener {
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("HOE") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("PICKAXE") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("SHOVEL") }.toList())
-        disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("CHESTPLATE") }.toList())
+        disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("CHEST") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("LEGGINGS") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("HELMET") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("BOOTS") }.toList())
@@ -49,8 +49,8 @@ object InteractListener {
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("SPASH_POTION") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("ARROW") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("LINGERING_POTION") }.toList())
-        disabledBlocks.addAll(listOf(Material.DISPENSER, Material.IRON_BLOCK, Material.TNT, Material.CHEST, Material.SCUTE, Material.STRUCTURE_VOID,
-            Material.DIAMOND_BLOCK, Material.FURNACE, Material.ENDER_CHEST, Material.TRAPPED_CHEST, Material.CONDUIT, Material.BELL, Material.ENDER_EYE,
+        disabledBlocks.addAll(listOf(Material.DISPENSER, Material.IRON_BLOCK, Material.TNT, Material.SCUTE, Material.STRUCTURE_VOID,
+            Material.DIAMOND_BLOCK, Material.FURNACE, Material.ENDER_CHEST, Material.CONDUIT, Material.BELL, Material.ENDER_EYE,
             Material.HOPPER, Material.DROPPER, Material.FLINT_AND_STEEL, Material.DIAMOND, Material.BEACON, Material.NAUTILUS_SHELL,
             Material.IRON_INGOT, Material.NETHERITE_INGOT, Material.NETHERITE_SCRAP, Material.GOLDEN_APPLE, Material.HEART_OF_THE_SEA,
             Material.ENCHANTED_GOLDEN_APPLE, Material.PAINTING, Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE, Material.NOTE_BLOCK,
