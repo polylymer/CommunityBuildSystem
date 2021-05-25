@@ -7,9 +7,9 @@ val JVM_VERSION = JavaVersion.VERSION_11
 val JVM_VERSION_STRING = JVM_VERSION.versionString
 
 plugins {
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "1.5.10"
     id("com.github.johnrengelman.shadow") version "6.1.0"
-    kotlin("plugin.serialization") version "1.5.0"
+    kotlin("plugin.serialization") version "1.5.10"
 }
 
 group = "de.hglabor"
@@ -27,7 +27,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
     implementation("net.axay", "kspigot", "1.16.27")
-    implementation("de.hglabor", "hglabor-utils", "0.0.6")
+    implementation("de.hglabor", "hglabor-utils", "0.0.10")
 }
 
 java.sourceCompatibility = JVM_VERSION
@@ -39,6 +39,7 @@ tasks.withType<KotlinCompile> {
 
 tasks {
     shadowJar {
+        minimize()
         simpleRelocate("net.axay.kspigot")
     }
 }
