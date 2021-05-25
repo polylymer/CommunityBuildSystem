@@ -88,7 +88,7 @@ class SettingsGUI {
                         3 -> +"${KColors.GRAY}current: ${KColors.GREEN}SURVIVAL"
                     }
                     +""
-                    +"${KColors.LIGHTBLUE}no description"
+                    +"${KColors.LIGHTBLUE}change the gamemode for all Players, also on Join"
                 }
             }
         }
@@ -103,7 +103,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.forbiddenItems) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}no description"
+                    +"${KColors.LIGHTBLUE}prohibits the use of all unwanted items"
                 }
             }
         }
@@ -118,7 +118,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.skulls) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}no description"
+                    +"${KColors.LIGHTBLUE}allows every player to add their own head with /skull"
                 }
             }
         }
@@ -158,12 +158,12 @@ class SettingsGUI {
         return itemStack(Material.BEACON) {
             meta {
                 flag(ItemFlag.HIDE_ATTRIBUTES)
-                name = "${KColors.YELLOW}OP BYPASS"
+                name = "${KColors.YELLOW}OP/MOD BYPASS"
                 addLore {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.opBypass) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}currently only join bypass if server is full"
+                    +"${KColors.LIGHTBLUE}join bypass if the server is full"
                 }
             }
         }
@@ -178,7 +178,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.portal) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}no description"
+                    +"${KColors.LIGHTBLUE}prohibits the use of all portals"
                 }
             }
         }
