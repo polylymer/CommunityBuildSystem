@@ -15,6 +15,7 @@ object Settings {
     var alwaysDay = true
     var antiWeather = true
     var opBypass = true
+    var portal = true
 
     fun setWorldSettings(world: World) {
         if (alwaysDay) {

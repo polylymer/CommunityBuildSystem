@@ -22,6 +22,7 @@ import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.event.player.PlayerPortalEvent
 import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.event.vehicle.VehicleCreateEvent
 import org.bukkit.event.weather.WeatherChangeEvent
@@ -137,6 +138,11 @@ object InteractListener {
 
         listen<PlayerSwapHandItemsEvent> {
             it.isCancelled = true
+        }
+
+        listen<PlayerPortalEvent> {
+            it.isCancelled = true
+            it.player.actionBar(Localization.getMessage("buildsystem.portalDisabled", getByPlayer(it.player)))
         }
     }
 }

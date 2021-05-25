@@ -65,6 +65,11 @@ class SettingsGUI {
                 Settings.opBypass = !Settings.opBypass
                 it.bukkitEvent.currentItem = opBypass()
             }
+
+            button(Slots.RowTwoSlotEight, disablePortals()) {
+                Settings.portal = !Settings.portal
+                it.bukkitEvent.currentItem = disablePortals()
+            }
         }
     }
 
@@ -159,6 +164,21 @@ class SettingsGUI {
                     +"${KColors.GRAY}current: ${if (Settings.opBypass) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
                     +"${KColors.LIGHTBLUE}currently only join bypass if server is full"
+                }
+            }
+        }
+    }
+
+    private fun disablePortals(): ItemStack {
+        return itemStack(Material.END_PORTAL_FRAME) {
+            meta {
+                flag(ItemFlag.HIDE_ATTRIBUTES)
+                name = "${KColors.YELLOW}PORTALS"
+                addLore {
+                    +""
+                    +"${KColors.GRAY}current: ${if (Settings.portal) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
+                    +""
+                    +"${KColors.LIGHTBLUE}no description"
                 }
             }
         }
