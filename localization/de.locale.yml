@@ -1,6 +1,5 @@
 buildsystem:
-  settings:
-    updateGamemode: buildsystem.settings.updateGamemode
+  updateGamemode: buildsystem.settings.updateGamemode
   skullIsDisabled: buildsystem.skullIsDisabled
   noPermission: messages.de.buildsystem.noPermission
   dropItems: buildsystem.dropItems
@@ -8,3 +7,4 @@ buildsystem:
   infoMessageOnJoin: buildsystem.infoMessageOnJoin
   addedSkull: buildsystem.addedSkull
   portalDisabled: buildsystem.portalDisabled
+  buildTimeOver: buildsystem.buildTimeOver

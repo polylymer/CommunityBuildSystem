@@ -2,7 +2,8 @@ package de.hglabor.utils
 
 import de.hglabor.BuildSystem
 import de.hglabor.config.Settings
-import net.axay.kspigot.chat.KColors
+import de.hglabor.localization.Locale
+import de.hglabor.localization.Localization
 import net.axay.kspigot.extensions.bukkit.kick
 import net.axay.kspigot.extensions.onlinePlayers
 import org.bukkit.Bukkit
@@ -23,11 +24,11 @@ class Timer {
             for (player: Player in onlinePlayers) {
                 if (config.get("player.timePlayed.${player.name}") == null) {
                     if (System.currentTimeMillis() - timePlayed[player]!! > Settings.getBuildTime()) {
-                        player.kick("${KColors.RED}time over")
+                        player.kick(Localization.getMessage("buildsystem.buildTimeOver", Locale.getByPlayer(player)))
                     }
                 } else {
                     if (System.currentTimeMillis() - timePlayed[player]!! + config.getLong("player.timePlayed.${player.name}") > Settings.getBuildTime()) {
-                        player.kick("${KColors.RED}time over")
+                        player.kick(Localization.getMessage("buildsystem.buildTimeOver", Locale.getByPlayer(player)))
                     }
                 }
             }
@@ -44,4 +45,3 @@ class Timer {
         }
     }
 }
-

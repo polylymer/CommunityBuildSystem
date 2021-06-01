@@ -1,6 +1,5 @@
 buildsystem:
-  settings:
-    updateGamemode: set gamemode for all Players to $gamemode Mode
+  updateGamemode: set gamemode for all Players to $gamemode Mode
   forbiddenItems: not allowed to use
   dropItems: can't drop
   skullIsDisabled: skulls are currently disabled
@@ -8,3 +7,4 @@ buildsystem:
   noPermission: you don't have the permission to use this command
   infoMessageOnJoin: you can use /skull to recieve your own head
   portalDisabled: buildsystem.portalDisabled
+  buildTimeOver: buildsystem.buildTimeOver
