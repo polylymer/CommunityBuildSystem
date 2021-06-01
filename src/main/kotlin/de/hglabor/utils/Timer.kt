@@ -22,13 +22,15 @@ class Timer {
     fun checkPlayTime() {
         Bukkit.getScheduler().runTaskTimer(BuildSystem.INSTANCE, Runnable {
             for (player: Player in onlinePlayers) {
-                if (config.get("player.timePlayed.${player.name}") == null) {
-                    if (System.currentTimeMillis() - timePlayed[player]!! > Settings.getBuildTime()) {
-                        player.kick(Localization.getMessage("buildsystem.buildTimeOver", Locale.getByPlayer(player)))
-                    }
-                } else {
-                    if (System.currentTimeMillis() - timePlayed[player]!! + config.getLong("player.timePlayed.${player.name}") > Settings.getBuildTime()) {
-                        player.kick(Localization.getMessage("buildsystem.buildTimeOver", Locale.getByPlayer(player)))
+                if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
+                    if (config.get("player.timePlayed.${player.name}") == null) {
+                        if (System.currentTimeMillis() - timePlayed[player]!! > Settings.getBuildTime()) {
+                            player.kick(Localization.getMessage("buildsystem.buildTimeOver", Locale.getByPlayer(player)))
+                        }
+                    } else {
+                        if (System.currentTimeMillis() - timePlayed[player]!! + config.getLong("player.timePlayed.${player.name}") > Settings.getBuildTime()) {
+                            player.kick(Localization.getMessage("buildsystem.buildTimeOver", Locale.getByPlayer(player)))
+                        }
                     }
                 }
             }

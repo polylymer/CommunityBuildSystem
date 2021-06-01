@@ -25,7 +25,6 @@ object JoinQuitListener {
             val player = it.player
             player.heal()
             player.feedSaturate()
-            BuildSystem.timer.putTimeInList(player)
             it.joinMessage = "${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"
 
             val settingsItem = itemStack(Material.BARREL) {
@@ -36,6 +35,10 @@ object JoinQuitListener {
             settingsItem.mark("protected")
             if (player.isOp) {
                 player.inventory.setItem(8, settingsItem)
+            }
+
+            if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
+                BuildSystem.timer.putTimeInList(player)
             }
 
             if (Settings.skulls) {
@@ -53,12 +56,15 @@ object JoinQuitListener {
         listen<PlayerQuitEvent> {
             val  player = it.player
             it.quitMessage = ""
-            BuildSystem.timer.saveTimeOnQuit(player)
+            if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
+                BuildSystem.timer.saveTimeOnQuit(player)
+            }
         }
 
         listen<PlayerLoginEvent> {
             if (Settings.opBypass) {
-                if (it.result == PlayerLoginEvent.Result.KICK_FULL && it.player.isOp || it.player.hasPermission("group.moderator")) {
+                val player = it.player
+                if (it.result == PlayerLoginEvent.Result.KICK_FULL && player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player)) {
                     it.allow()
                 }
             }
