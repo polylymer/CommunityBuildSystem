@@ -26,8 +26,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
-    implementation("net.axay", "kspigot", "1.16.27")
-    implementation("de.hglabor", "hglabor-utils", "0.0.10")
+    implementation("net.axay", "kspigot", "1.16.29")
+    implementation("de.hglabor", "hglabor-utils", "0.0.11")
 }
 
 java.sourceCompatibility = JVM_VERSION

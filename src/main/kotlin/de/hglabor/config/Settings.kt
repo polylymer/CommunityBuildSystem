@@ -1,10 +1,12 @@
 package de.hglabor.config
 
+import de.hglabor.BuildSystem
 import de.hglabor.gui.SettingsGUI
 import net.axay.kspigot.gui.openGUI
 import org.bukkit.Difficulty
 import org.bukkit.GameRule
 import org.bukkit.World
+import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.entity.Player
 
 object Settings {
@@ -16,6 +18,18 @@ object Settings {
     var antiWeather = true
     var opBypass = true
     var portal = true
+
+    private val configuration: FileConfiguration = BuildSystem.INSTANCE.config
+    fun setConfig() {
+        if (configuration.get("buildsystem.settings.BuildTime") == null) {
+            configuration.set("buildsystem.settings.BuildTime", 20*60*20*60000)
+            BuildSystem.INSTANCE.saveConfig()
+        }
+    }
+
+    fun getBuildTime(): Int {
+        return configuration.getInt("buildsystem.settings.BuildTime")
+    }
 
     fun setWorldSettings(world: World) {
         if (alwaysDay) {

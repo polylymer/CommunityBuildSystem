@@ -1,5 +1,6 @@
 package de.hglabor.events
 
+import de.hglabor.BuildSystem
 import de.hglabor.config.Settings
 import de.hglabor.localization.Locale.getByPlayer
 import de.hglabor.localization.Localization
@@ -16,16 +17,16 @@ import org.bukkit.GameMode
 import org.bukkit.Material
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerLoginEvent
+import org.bukkit.event.player.PlayerQuitEvent
 
 object JoinQuitListener {
     init {
         listen<PlayerJoinEvent> {
             val player = it.player
-
             player.heal()
             player.feedSaturate()
+            BuildSystem.timer.putTimeInList(player)
             it.joinMessage = "${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"
-
 
             val settingsItem = itemStack(Material.BARREL) {
                 meta {
@@ -47,6 +48,12 @@ object JoinQuitListener {
                 2 -> player.gameMode = GameMode.SPECTATOR
                 3 -> player.gameMode = GameMode.SURVIVAL
             }
+        }
+
+        listen<PlayerQuitEvent> {
+            val  player = it.player
+            it.quitMessage = ""
+            BuildSystem.timer.saveTimeOnQuit(player)
         }
 
         listen<PlayerLoginEvent> {
