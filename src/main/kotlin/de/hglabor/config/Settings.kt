@@ -20,14 +20,14 @@ object Settings {
 
     private val configuration: FileConfiguration = BuildSystem.INSTANCE.config
     fun setConfig() {
-        if (configuration.get("buildsystem.settings.BuildTime") == null) {
-            configuration.set("buildsystem.settings.BuildTime", 20*60*20*60000)
+        if (configuration.get("buildsystem.settings.BuildTimeInMin") == null) {
+            configuration.set("buildsystem.settings.BuildTimeInMin", 20)
             BuildSystem.INSTANCE.saveConfig()
         }
     }
 
     fun getBuildTime(): Int {
-        return configuration.getInt("buildsystem.settings.BuildTime")
+        return configuration.getInt("buildsystem.settings.BuildTimeInMin") * 60000
     }
 
     fun setWorldSettings(world: World) {
