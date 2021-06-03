@@ -14,8 +14,7 @@ object Settings {
     var gm1 = 1
     var forbiddenItems = true
     var skulls = true
-    var alwaysDay = true
-    var antiWeather = true
+    var clearSunnyWeather = true
     var opBypass = true
     var portal = true
 
@@ -32,13 +31,11 @@ object Settings {
     }
 
     fun setWorldSettings(world: World) {
-        if (alwaysDay) {
+        if (clearSunnyWeather) {
             world.time = 6000
-            world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
-        }
-        if (antiWeather) {
             world.setStorm(false)
             world.isThundering = false
+            world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
             world.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
         }
         world.difficulty = Difficulty.PEACEFUL

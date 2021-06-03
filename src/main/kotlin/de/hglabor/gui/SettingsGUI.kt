@@ -36,37 +36,28 @@ class SettingsGUI {
                 it.bukkitEvent.currentItem = skulls()
             }
 
-            button(Slots.RowTwoSlotFive, alwaysDay()) {
-                if (Settings.alwaysDay) {
+            button(Slots.RowTwoSlotFive, clearSunnyWeather()) {
+                if (Settings.clearSunnyWeather) {
                     Bukkit.getWorld("world")?.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true)
-                    Settings.alwaysDay = false
+                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_WEATHER_CYCLE, true)
+                    Settings.clearSunnyWeather = false
                 } else {
                     Bukkit.getWorld("world")?.time = 6000
-                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, true)
-                    Settings.alwaysDay = true
-                }
-                it.bukkitEvent.currentItem = alwaysDay()
-            }
-
-            button(Slots.RowTwoSlotSix, antiWeather()) {
-                if (Settings.antiWeather) {
-                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_WEATHER_CYCLE, true)
-                    Settings.antiWeather = false
-                } else {
                     Bukkit.getWorld("world")?.setStorm(false)
                     Bukkit.getWorld("world")?.isThundering = false
+                    Bukkit.getWorld("world")?.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
                     Bukkit.getWorld("world")?.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
-                    Settings.antiWeather = true
+                    Settings.clearSunnyWeather = true
                 }
-                it.bukkitEvent.currentItem = antiWeather()
+                it.bukkitEvent.currentItem = clearSunnyWeather()
             }
 
-            button(Slots.RowTwoSlotSeven, opBypass()) {
+            button(Slots.RowTwoSlotSix, opBypass()) {
                 Settings.opBypass = !Settings.opBypass
                 it.bukkitEvent.currentItem = opBypass()
             }
 
-            button(Slots.RowTwoSlotEight, disablePortals()) {
+            button(Slots.RowTwoSlotSeven, disablePortals()) {
                 Settings.portal = !Settings.portal
                 it.bukkitEvent.currentItem = disablePortals()
             }
@@ -124,29 +115,14 @@ class SettingsGUI {
         }
     }
 
-    private fun alwaysDay(): ItemStack {
+    private fun clearSunnyWeather(): ItemStack {
         return itemStack(Material.SUNFLOWER) {
             meta {
                 flag(ItemFlag.HIDE_ATTRIBUTES)
                 name = "${KColors.YELLOW}ALWAYS DAY"
                 addLore {
                     +""
-                    +"${KColors.GRAY}current: ${if (Settings.alwaysDay) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
-                    +""
-                    +"${KColors.LIGHTBLUE}no description"
-                }
-            }
-        }
-    }
-
-    private fun antiWeather(): ItemStack {
-        return itemStack(Material.NETHER_SPROUTS) {
-            meta {
-                flag(ItemFlag.HIDE_ATTRIBUTES)
-                name = "${KColors.YELLOW}NO BAD WEATHER"
-                addLore {
-                    +""
-                    +"${KColors.GRAY}current: ${if (Settings.antiWeather) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
+                    +"${KColors.GRAY}current: ${if (Settings.clearSunnyWeather) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
                     +"${KColors.LIGHTBLUE}no description"
                 }
