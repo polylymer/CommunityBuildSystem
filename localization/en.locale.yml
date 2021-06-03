@@ -8,3 +8,11 @@ buildsystem:
   infoMessageOnJoin: you can use /skull to recieve your own head
   portalDisabled: buildsystem.portalDisabled
   buildTimeOver: buildsystem.buildTimeOver
+  settings:
+    description:
+      gamemode: buildsystem.settings.description.gamemode
+      forbiddenItems: buildsystem.settings.description.forbiddenItems
+      skulls: buildsystem.settings.description.skulls
+      clearSunnyWeather: buildsystem.settings.description.clearSunnyWeather
+      opBypass: buildsystem.settings.description.opBypass
+      disablePortals: buildsystem.settings.description.disablePortals

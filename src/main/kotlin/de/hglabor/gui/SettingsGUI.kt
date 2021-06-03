@@ -1,6 +1,8 @@
 package de.hglabor.gui
 
 import de.hglabor.config.Settings
+import de.hglabor.localization.Locale
+import de.hglabor.localization.Localization
 import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.gui.*
 import net.axay.kspigot.items.*
@@ -79,7 +81,7 @@ class SettingsGUI {
                         3 -> +"${KColors.GRAY}current: ${KColors.GREEN}SURVIVAL"
                     }
                     +""
-                    +"${KColors.LIGHTBLUE}change the gamemode for all Players, also on Join"
+                    +Localization.getMessage("buildsystem.settings.description.gamemode", Locale.ENGLISH)
                 }
             }
         }
@@ -94,7 +96,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.forbiddenItems) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}prohibits the use of all unwanted items"
+                    +Localization.getMessage("buildsystem.settings.description.forbiddenItems", Locale.ENGLISH)
                 }
             }
         }
@@ -109,7 +111,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.skulls) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}allows every player to add their own head with /skull"
+                    +Localization.getMessage("buildsystem.settings.description.skulls", Locale.ENGLISH)
                 }
             }
         }
@@ -124,7 +126,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.clearSunnyWeather) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}no description"
+                    +Localization.getMessage("buildsystem.settings.description.clearSunnyWeather", Locale.ENGLISH)
                 }
             }
         }
@@ -139,7 +141,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.opBypass) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}join bypass if the server is full"
+                    +Localization.getMessage("buildsystem.settings.description.opBypass", Locale.ENGLISH)
                 }
             }
         }
@@ -154,7 +156,7 @@ class SettingsGUI {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.portal) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
-                    +"${KColors.LIGHTBLUE}prohibits the use of all portals"
+                    +Localization.getMessage("buildsystem.settings.description.disablePortals", Locale.ENGLISH)
                 }
             }
         }
