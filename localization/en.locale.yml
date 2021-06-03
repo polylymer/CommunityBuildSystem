@@ -5,10 +5,11 @@ buildsystem:
   skullIsDisabled: skulls are currently disabled
   addedSkull: added head from $skull to your inventory
   noPermission: you don't have the permission to use this command
-  infoMessageOnJoin: you can use /skull to recieve your own head
   portalDisabled: buildsystem.portalDisabled
   buildTimeOver: buildsystem.buildTimeOver
   errorOcurred: buildsystem.errorOcurred
+  SkullInfoMessage: buildsystem.SkullInfoMessage
+  LimitedTimeInfoMessage: buildsystems.LimitedTimeInfoMessage
   settings:
     description:
       gamemode: buildsystem.settings.description.gamemode

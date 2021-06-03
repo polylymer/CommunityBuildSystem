@@ -4,8 +4,9 @@ buildsystem:
   noPermission: messages.de.buildsystem.noPermission
   dropItems: buildsystem.dropItems
   forbiddenItems: buildsystem.forbiddenItems
-  infoMessageOnJoin: buildsystem.infoMessageOnJoin
   addedSkull: buildsystem.addedSkull
   portalDisabled: buildsystem.portalDisabled
   buildTimeOver: buildsystem.buildTimeOver
   errorOcurred: buildsystem.errorOcurred
+  SkullInfoMessage: buildsystem.SkullInfoMessage
+  LimitedTimeInfoMessage: buildsystems.LimitedTimeInfoMessage

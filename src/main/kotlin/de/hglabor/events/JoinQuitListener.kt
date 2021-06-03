@@ -26,6 +26,7 @@ object JoinQuitListener {
             player.heal()
             player.feedSaturate()
             it.joinMessage = "${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"
+            player.sendMessage(Localization.getMessage("buildsystem.LimitedTimeInfoMessage", getByPlayer(player)))
 
             val settingsItem = itemStack(Material.BARREL) {
                 meta {
@@ -42,7 +43,7 @@ object JoinQuitListener {
             }
 
             if (Settings.skulls) {
-                player.sendMessage(Localization.getMessage("buildsystem.infoMessageOnJoin", getByPlayer(player)))
+                player.sendMessage(Localization.getMessage("buildsystem.SkullInfoMessage", getByPlayer(player)))
             }
 
             when (Settings.gm1) {
