@@ -8,3 +8,4 @@ buildsystem:
   addedSkull: buildsystem.addedSkull
   portalDisabled: buildsystem.portalDisabled
   buildTimeOver: buildsystem.buildTimeOver
+  errorOcurred: buildsystem.errorOcurred

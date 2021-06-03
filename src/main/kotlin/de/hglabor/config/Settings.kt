@@ -39,6 +39,7 @@ object Settings {
             world.setGameRule(GameRule.DO_WEATHER_CYCLE, false)
         }
         world.difficulty = Difficulty.PEACEFUL
+        world.worldBorder.size = 200.0
         world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false)
         world.setGameRule(GameRule.SHOW_DEATH_MESSAGES, false)
         world.setGameRule(GameRule.MOB_GRIEFING, false)

@@ -4,11 +4,13 @@ import de.hglabor.config.Settings
 import de.hglabor.localization.Locale
 import de.hglabor.localization.Localization
 import net.axay.kspigot.chat.KColors
+import net.axay.kspigot.chat.input.awaitAnvilInput
 import net.axay.kspigot.gui.*
 import net.axay.kspigot.items.*
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
 import org.bukkit.Material
+import org.bukkit.WorldBorder
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 
@@ -62,6 +64,21 @@ class SettingsGUI {
             button(Slots.RowTwoSlotSeven, disablePortals()) {
                 Settings.portal = !Settings.portal
                 it.bukkitEvent.currentItem = disablePortals()
+            }
+
+            button(Slots.RowTwoSlotEight, worldborder()) {
+                val player = it.player
+                it.player.closeInventory()
+                player.awaitAnvilInput("Worldborder Size") { result ->
+                    kotlin.runCatching {
+                        Bukkit.getWorld("world")!!.worldBorder.size = result.input!!.toDouble()
+                        Settings.openSettingsGUI(player)
+                    }.onFailure {
+                        Localization.getMessage("buildsystem.errorOcurred", Locale.getByPlayer(player))
+                        Settings.openSettingsGUI(player)
+                    }
+                }
+                it.bukkitEvent.currentItem = worldborder()
             }
         }
     }
@@ -157,6 +174,21 @@ class SettingsGUI {
                     +"${KColors.GRAY}current: ${if (Settings.portal) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
                     +""
                     +Localization.getMessage("buildsystem.settings.description.disablePortals", Locale.ENGLISH)
+                }
+            }
+        }
+    }
+
+    private fun worldborder(): ItemStack {
+        return itemStack(Material.BARRIER) {
+            meta {
+                flag(ItemFlag.HIDE_ATTRIBUTES)
+                name = "${KColors.YELLOW}WORLDBORDER"
+                addLore {
+                    +""
+                    +"${KColors.GRAY}current: ${KColors.LIGHTBLUE}${Bukkit.getWorld("world")!!.worldBorder.size}"
+                    +""
+                    +Localization.getMessage("buildsystem.settings.description.worldborder", Locale.ENGLISH)
                 }
             }
         }
