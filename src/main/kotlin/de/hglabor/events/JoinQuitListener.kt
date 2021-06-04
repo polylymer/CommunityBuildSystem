@@ -52,6 +52,8 @@ object JoinQuitListener {
                 2 -> player.gameMode = GameMode.SPECTATOR
                 3 -> player.gameMode = GameMode.SURVIVAL
             }
+
+            BuildSystem.scoreboard.addPlayerToScoreboard(player)
         }
 
         listen<PlayerQuitEvent> {

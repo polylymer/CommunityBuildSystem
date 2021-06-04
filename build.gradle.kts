@@ -19,6 +19,7 @@ repositories {
     mavenCentral()
     mavenLocal()
     jcenter()
+    maven("https://jitpack.io")
     maven("https://papermc.io/repo/repository/maven-public/")
     maven("https://repo.codemc.io/repository/maven-snapshots/")
 }
@@ -27,7 +28,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
     implementation("net.axay", "kspigot", "1.16.29")
-    implementation("de.hglabor", "hglabor-utils", "0.0.11")
+    implementation("com.github.JordanOsterberg", "JScoreboards", "1.0.1-RELEASE")
+
 }
 
 java.sourceCompatibility = JVM_VERSION
