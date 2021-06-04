@@ -34,11 +34,11 @@ class GamemodeGUI {
             }) {
                 for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.CREATIVE
-                    it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "CREATIVE"), getByPlayer(it.player)))
                     Settings.gm1 = 0
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)
                 }
+                it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "CREATIVE"), getByPlayer(it.player)))
             }
 
             button(Slots.RowTwoSlotFour, itemStack(Material.ORANGE_WOOL) {
@@ -49,11 +49,11 @@ class GamemodeGUI {
             }) {
                 for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.ADVENTURE
-                    it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "ADVENTURE"), getByPlayer(it.player)))
                     Settings.gm1 = 1
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)
                 }
+                it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "ADVENTURE"), getByPlayer(it.player)))
             }
 
             button(Slots.RowTwoSlotSix, itemStack(Material.PURPLE_WOOL) {
@@ -64,11 +64,11 @@ class GamemodeGUI {
             }) {
                 for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.SPECTATOR
-                    it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "SPECTATOR"), getByPlayer(it.player)))
                     Settings.gm1 = 2
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)
                 }
+                it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "SPECTATOR"), getByPlayer(it.player)))
             }
 
             button(Slots.RowTwoSlotEight, itemStack(Material.RED_WOOL) {
@@ -79,11 +79,11 @@ class GamemodeGUI {
             }) {
                 for (players: Player in onlinePlayers) {
                     players.gameMode = GameMode.SURVIVAL
-                    it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "SURVIVAL"), getByPlayer(it.player)))
                     Settings.gm1 = 3
                     it.player.closeInventory()
                     Settings.openSettingsGUI(it.player)
                 }
+                it.player.sendMessage(Localization.getMessage("buildsystem.updateGamemode", ImmutableMap.of("gamemode", "SURVIVAL"), getByPlayer(it.player)))
             }
         }
     }
