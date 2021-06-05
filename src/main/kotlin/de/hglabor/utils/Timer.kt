@@ -32,13 +32,8 @@ class Timer {
     }
 
     fun saveTimeOnQuit(player: Player) {
-        if (config.get("player.timePlayed.${player.name}") == null) {
-            config.set("player.timePlayed.${player.name}", getPlayerTime(player))
-            BuildSystem.INSTANCE.saveConfig()
-        } else {
-            config.set("player.timePlayed.${player.name}", System.currentTimeMillis() + getPlayerTime(player))
-            BuildSystem.INSTANCE.saveConfig()
-        }
+        config.set("player.timePlayed.${player.name}", getPlayerTime(player))
+        BuildSystem.INSTANCE.saveConfig()
     }
 
     fun getPlayerTimeOrderly(player: Player): String {
