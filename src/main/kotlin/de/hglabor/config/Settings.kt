@@ -60,23 +60,10 @@ object Settings {
         player.openGUI(SettingsGUI().gui)
     }
 
-    fun isAdmin(player: Player): Boolean {
-        return player.hasPermission("group.admin")
-    }
-
-    fun isDeveloper(player: Player): Boolean {
-        return player.hasPermission("group.developer")
-    }
-
-    fun isModerator(player: Player): Boolean {
-        return player.hasPermission("group.moderator")
-    }
-
-    fun isCreativity(player: Player): Boolean {
-        return player.hasPermission("group.creativity")
-    }
-
-    fun isBuilder(player: Player): Boolean {
-        return player.hasPermission("group.builder")
+    fun isStaff(player: Player): Boolean {
+        if (player.isOp || player.hasPermission("group.admin") || player.hasPermission("group.developer") || player.hasPermission("group.moderator") || player.hasPermission("group.creativity") || player.hasPermission("group.builder")) {
+            return true
+        }
+        return false
     }
 }

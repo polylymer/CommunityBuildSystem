@@ -55,22 +55,23 @@ object JoinQuitListener {
         listen<PlayerQuitEvent> {
             val  player = it.player
             it.quitMessage(Component.text(""))
-            if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
+            if (!Settings.isStaff(player)) {
                 BuildSystem.timer.saveTimeOnQuit(player)
             }
         }
 
         listen<PlayerLoginEvent> {
             val player = it.player
-            if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
+            if (!Settings.isStaff(player)) {
                 BuildSystem.timer.putTimeInList(player)
             }
 
             if (BuildSystem.timer.getPlayerTime(player) >= Settings.getBuildTime()) {
                 it.disallow(PlayerLoginEvent.Result.KICK_OTHER, Component.text(Localization.getMessage("buildsystem.buildTimeOver", getByPlayer(player))))
             }
+
             if (Settings.opBypass) {
-                if (it.result == PlayerLoginEvent.Result.KICK_FULL && player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player)) {
+                if (it.result == PlayerLoginEvent.Result.KICK_FULL && Settings.isStaff(player)) {
                     it.allow()
                 }
             }
