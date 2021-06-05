@@ -51,7 +51,7 @@ object InteractListener {
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("ARROW") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("LINGERING_POTION") }.toList())
         disabledBlocks.addAll(listOf(Material.DISPENSER, Material.IRON_BLOCK, Material.TNT, Material.SCUTE, Material.STRUCTURE_VOID,
-            Material.DIAMOND_BLOCK, Material.FURNACE, Material.ENDER_CHEST, Material.CONDUIT, Material.BELL, Material.ENDER_EYE,
+            Material.DIAMOND_BLOCK, Material.FURNACE, Material.ENDER_CHEST, Material.CONDUIT, Material.BELL, Material.ENDER_EYE, Material.FIRE_CHARGE,
             Material.HOPPER, Material.DROPPER, Material.FLINT_AND_STEEL, Material.DIAMOND, Material.BEACON, Material.NAUTILUS_SHELL,
             Material.IRON_INGOT, Material.NETHERITE_INGOT, Material.NETHERITE_SCRAP, Material.GOLDEN_APPLE, Material.HEART_OF_THE_SEA,
             Material.ENCHANTED_GOLDEN_APPLE, Material.PAINTING, Material.ENDER_PEARL, Material.EXPERIENCE_BOTTLE, Material.NOTE_BLOCK,

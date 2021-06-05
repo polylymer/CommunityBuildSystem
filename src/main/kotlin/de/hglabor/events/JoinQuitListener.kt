@@ -26,6 +26,7 @@ object JoinQuitListener {
             val player = it.player
             player.heal()
             player.feedSaturate()
+            BuildSystem.scoreboard.addPlayerToScoreboard(player)
             it.joinMessage(Component.text("${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"))
             player.sendMessage(Localization.getMessage("buildsystem.LimitedTimeInfoMessage", getByPlayer(player)))
 
@@ -39,10 +40,6 @@ object JoinQuitListener {
                 player.inventory.setItem(8, settingsItem)
             }
 
-            if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
-                BuildSystem.timer.putTimeInList(player)
-            }
-
             if (Settings.skulls) {
                 player.sendMessage(Localization.getMessage("buildsystem.SkullInfoMessage", getByPlayer(player)))
             }
@@ -53,8 +50,6 @@ object JoinQuitListener {
                 2 -> player.gameMode = GameMode.SPECTATOR
                 3 -> player.gameMode = GameMode.SURVIVAL
             }
-
-            BuildSystem.scoreboard.addPlayerToScoreboard(player)
         }
 
         listen<PlayerQuitEvent> {
@@ -66,8 +61,15 @@ object JoinQuitListener {
         }
 
         listen<PlayerLoginEvent> {
+            val player = it.player
+            if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
+                BuildSystem.timer.putTimeInList(player)
+            }
+
+            if (BuildSystem.timer.getPlayerTime(player) >= Settings.getBuildTime()) {
+                it.disallow(PlayerLoginEvent.Result.KICK_OTHER, Component.text(Localization.getMessage("buildsystem.buildTimeOver", getByPlayer(player))))
+            }
             if (Settings.opBypass) {
-                val player = it.player
                 if (it.result == PlayerLoginEvent.Result.KICK_FULL && player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player)) {
                     it.allow()
                 }

@@ -64,4 +64,16 @@ class Timer {
             "you aren't tracked"
         }
     }
+
+    fun getPlayerTime(player: Player): Long {
+        return if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
+            if (config.get("player.timePlayed.${player.name}") == null) {
+                System.currentTimeMillis() - timePlayed[player]!!
+            } else {
+                System.currentTimeMillis() - timePlayed[player]!! + config.getLong("player.timePlayed.${player.name}")
+            }
+        } else {
+            0
+        }
+    }
 }
