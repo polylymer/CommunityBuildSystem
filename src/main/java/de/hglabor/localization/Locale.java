@@ -13,7 +13,7 @@ public enum Locale {
         this.alias = alias;
     }
 
-    private String alias;
+    private final String alias;
 
     public String getAlias() {
         return alias;

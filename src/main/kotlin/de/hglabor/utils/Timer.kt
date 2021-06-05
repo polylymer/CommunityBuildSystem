@@ -49,8 +49,8 @@ class Timer {
 
     fun getPlayerTimeOrderly(player: Player): String {
         return if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
-            var minutes: Long = 0
-            var seconds: Long = 0
+            val minutes: Long
+            val seconds: Long
             if (config.get("player.timePlayed.${player.name}") == null) {
                 minutes = ((System.currentTimeMillis() - timePlayed[player]!!) / 1000 / 60)
                 seconds = ((System.currentTimeMillis() - timePlayed[player]!!) / 1000 % 60)

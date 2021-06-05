@@ -28,6 +28,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
     implementation("net.axay", "kspigot", "1.16.29")
+    implementation("net.kyori", "adventure-api", "4.7.0")
     implementation("com.github.JordanOsterberg", "JScoreboards", "1.0.1-RELEASE")
 
 }

@@ -14,11 +14,10 @@ import net.axay.kspigot.extensions.bukkit.register
 import net.axay.kspigot.main.KSpigot
 import org.bukkit.Bukkit
 
-
 class BuildSystem : KSpigot() {
 
     companion object {
-        lateinit var INSTANCE: BuildSystem;
+        lateinit var INSTANCE: BuildSystem
         lateinit var timer: Timer
         lateinit var scoreboard: Scoreboard
     }

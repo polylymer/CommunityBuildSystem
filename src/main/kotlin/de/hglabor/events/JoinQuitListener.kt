@@ -12,6 +12,7 @@ import net.axay.kspigot.items.itemStack
 import net.axay.kspigot.items.meta
 import net.axay.kspigot.items.name
 import net.axay.kspigot.utils.mark
+import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -25,7 +26,7 @@ object JoinQuitListener {
             val player = it.player
             player.heal()
             player.feedSaturate()
-            it.joinMessage = "${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"
+            it.joinMessage(Component.text("${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"))
             player.sendMessage(Localization.getMessage("buildsystem.LimitedTimeInfoMessage", getByPlayer(player)))
 
             val settingsItem = itemStack(Material.BARREL) {
@@ -58,7 +59,7 @@ object JoinQuitListener {
 
         listen<PlayerQuitEvent> {
             val  player = it.player
-            it.quitMessage = ""
+            it.quitMessage(Component.text(""))
             if (!(player.isOp || Settings.isAdmin(player) || Settings.isDeveloper(player) || Settings.isModerator(player) || Settings.isCreativity(player) || Settings.isBuilder(player))) {
                 BuildSystem.timer.saveTimeOnQuit(player)
             }

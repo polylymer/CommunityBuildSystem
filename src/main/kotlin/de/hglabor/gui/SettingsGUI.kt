@@ -10,7 +10,6 @@ import net.axay.kspigot.items.*
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
 import org.bukkit.Material
-import org.bukkit.WorldBorder
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 

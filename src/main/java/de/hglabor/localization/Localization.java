@@ -10,12 +10,12 @@ import java.util.HashMap;
 
 public class Localization {
 
-    private static HashMap<Locale, LocalizationFile> localizationFiles = new HashMap<>();
+    private static final HashMap<Locale, LocalizationFile> localizationFiles = new HashMap<>();
 
-    private static String colorValue = "\u00A7";
-    private static String colorKey = "&";
-    private static String newLineValue = "\n";
-    private static String newLineKey = "##";
+    private static final String  colorValue = "\u00A7";
+    private static final String colorKey = "&";
+    private static final String newLineValue = "\n";
+    private static final String newLineKey = "##";
 
     public static void init() {
         File localizationDirecory = new File(BuildSystem.INSTANCE.getDataFolder() + "/lang/");
