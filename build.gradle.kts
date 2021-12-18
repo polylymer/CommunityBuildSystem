@@ -39,6 +39,9 @@ tasks {
     processResources {
         expand("version" to version)
     }
+    shadowJar {
+        simpleRelocate("net.axay.kspigot")
+    }
 }
 
 fun ShadowJar.simpleRelocate(pattern: String) {

@@ -27,7 +27,6 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.event.vehicle.VehicleCreateEvent
 import org.bukkit.event.weather.WeatherChangeEvent
 import java.util.*
-import kotlin.streams.toList
 
 object InteractListener {
     init {
@@ -50,6 +49,7 @@ object InteractListener {
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("SPASH_POTION") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("ARROW") }.toList())
         disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("LINGERING_POTION") }.toList())
+        disabledBlocks.addAll(Arrays.stream(Material.values()).filter { material: Material -> material.name.contains("ORE") }.toList())
         disabledBlocks.addAll(listOf(Material.DISPENSER, Material.IRON_BLOCK, Material.TNT, Material.SCUTE, Material.STRUCTURE_VOID,
             Material.DIAMOND_BLOCK, Material.FURNACE, Material.ENDER_CHEST, Material.CONDUIT, Material.BELL, Material.ENDER_EYE, Material.FIRE_CHARGE,
             Material.HOPPER, Material.DROPPER, Material.FLINT_AND_STEEL, Material.DIAMOND, Material.BEACON, Material.NAUTILUS_SHELL,
@@ -58,7 +58,8 @@ object InteractListener {
             Material.ITEM_FRAME, Material.GOLDEN_CARROT, Material.WITHER_SKELETON_SKULL, Material.WITHER_SKELETON_WALL_SKULL, Material.STRUCTURE_BLOCK,
             Material.ARMOR_STAND, Material.END_CRYSTAL, Material.SHIELD, Material.ELYTRA, Material.TOTEM_OF_UNDYING, Material.BREWING_STAND,
             Material.SHULKER_SHELL, Material.IRON_NUGGET, Material.TRIDENT, Material.CROSSBOW, Material.BARREL, Material.RESPAWN_ANCHOR,
-            Material.SMOKER, Material.BLAST_FURNACE, Material.NETHERITE_BLOCK, Material.ANCIENT_DEBRIS, Material.COMMAND_BLOCK, Material.NETHER_STAR))
+            Material.SMOKER, Material.BLAST_FURNACE, Material.NETHERITE_BLOCK, Material.ANCIENT_DEBRIS, Material.COMMAND_BLOCK, Material.NETHER_STAR,
+            Material.AXOLOTL_BUCKET, Material.BUNDLE))
 
         listen<PlayerInteractEvent> {
             val player = it.player

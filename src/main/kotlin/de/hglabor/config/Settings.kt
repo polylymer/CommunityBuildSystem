@@ -61,7 +61,7 @@ object Settings {
     }
 
     fun isStaff(player: Player): Boolean {
-        if (player.isOp || player.hasPermission("group.admin") || player.hasPermission("group.developer") || player.hasPermission("group.moderator") || player.hasPermission("group.creativity") || player.hasPermission("group.builder")) {
+        if (player.isOp || player.hasPermission("hglabor.moderation.canSeeAndWriteStaffChat")) {
             return true
         }
         return false
