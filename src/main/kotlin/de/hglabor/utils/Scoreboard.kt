@@ -35,4 +35,8 @@ class Scoreboard {
     fun addPlayerToScoreboard(player: Player) {
         this.scoreboard!!.addPlayer(player)
     }
+
+    fun removePlayerFromScoreboard(player: Player) {
+        this.scoreboard!!.removePlayer(player)
+    }
 }

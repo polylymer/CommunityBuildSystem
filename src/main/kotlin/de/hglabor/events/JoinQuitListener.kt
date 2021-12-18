@@ -12,7 +12,6 @@ import net.axay.kspigot.items.itemStack
 import net.axay.kspigot.items.meta
 import net.axay.kspigot.items.name
 import net.axay.kspigot.utils.mark
-import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Material
@@ -27,7 +26,7 @@ object JoinQuitListener {
             player.heal()
             player.feedSaturate()
             BuildSystem.scoreboard.addPlayerToScoreboard(player)
-            it.joinMessage(Component.text("${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"))
+            it.joinMessage ="${KColors.GOLD}${player.name}${KColors.WHITE} joined the Server ${KColors.GRAY}[${KColors.WHITE}${Bukkit.getOnlinePlayers().size}${KColors.GRAY}/${KColors.WHITE}${Bukkit.getServer().maxPlayers}${KColors.GRAY}]"
             player.sendMessage(Localization.getMessage("buildsystem.LimitedTimeInfoMessage", getByPlayer(player)))
 
             val settingsItem = itemStack(Material.BARREL) {
@@ -54,10 +53,11 @@ object JoinQuitListener {
 
         listen<PlayerQuitEvent> {
             val  player = it.player
-            it.quitMessage(Component.text(""))
+            it.quitMessage = ""
             if (!Settings.isStaff(player)) {
                 BuildSystem.timer.saveTimeOnQuit(player)
             }
+            BuildSystem.scoreboard.removePlayerFromScoreboard(player)
         }
 
         listen<PlayerLoginEvent> {
@@ -67,7 +67,7 @@ object JoinQuitListener {
             }
 
             if (BuildSystem.timer.getPlayerTime(player) >= Settings.getBuildTime()) {
-                it.disallow(PlayerLoginEvent.Result.KICK_OTHER, Component.text(Localization.getMessage("buildsystem.buildTimeOver", getByPlayer(player))))
+                it.disallow(PlayerLoginEvent.Result.KICK_OTHER, Localization.getMessage("buildsystem.buildTimeOver", getByPlayer(player)))
             }
 
             if (Settings.opBypass) {

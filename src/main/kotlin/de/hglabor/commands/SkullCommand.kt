@@ -4,9 +4,7 @@ import com.google.common.collect.ImmutableMap
 import de.hglabor.config.Settings
 import de.hglabor.localization.Locale.getByPlayer
 import de.hglabor.localization.Localization
-import net.axay.kspigot.chat.KColors
 import net.axay.kspigot.items.itemStack
-import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -23,7 +21,7 @@ object SkullCommand : CommandExecutor{
                 if (args.isEmpty()) {
                     val skull = itemStack(Material.PLAYER_HEAD) {
                         val meta = itemMeta as SkullMeta
-                        meta.displayName(Component.text("${KColors.LIGHTBLUE}" + sender.name))
+                        meta.setDisplayName(sender.name)
                         meta.owningPlayer = sender
                         itemMeta = meta
                     }
