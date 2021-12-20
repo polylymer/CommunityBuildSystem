@@ -5,13 +5,10 @@ import de.hglabor.gui.SettingsGUI
 import de.hglabor.localization.Locale.getByPlayer
 import de.hglabor.localization.Localization
 import net.axay.kspigot.event.listen
-import net.axay.kspigot.extensions.broadcast
 import net.axay.kspigot.extensions.bukkit.actionBar
 import net.axay.kspigot.gui.openGUI
-import net.axay.kspigot.items.itemStack
 import net.axay.kspigot.utils.hasMark
 import org.bukkit.Material
-import org.bukkit.entity.Minecart
 import org.bukkit.entity.Player
 import org.bukkit.event.block.Action
 import org.bukkit.event.block.BlockPlaceEvent
@@ -89,7 +86,7 @@ object InteractListener {
                     } else if (!(it.cursor == null || it.cursor!!.type == Material.AIR)) {
                         if (disabledBlocks.contains(it.cursor!!.type) && Settings.forbiddenItems) {
                             it.isCancelled = true
-                            it.cursor = itemStack(Material.AIR) {}
+                            it.whoClicked.itemOnCursor.type = Material.AIR
                             player.actionBar(Localization.getMessage("buildsystem.forbiddenItems", getByPlayer(player)))
                         }
                     }
@@ -122,15 +119,13 @@ object InteractListener {
         }
 
         listen<WeatherChangeEvent> {
-            it.isCancelled = true
+            if (Settings.clearSunnyWeather) {
+                it.isCancelled = true
+            }
         }
 
         listen<VehicleCreateEvent> {
-            if (it.vehicle is Minecart) {
-                broadcast(it.vehicle.name)
-                broadcast(it.vehicle.type.name)
-                it.isCancelled = true
-            }
+            it.isCancelled = true
         }
 
         listen<EntitySpawnEvent> {
@@ -142,8 +137,10 @@ object InteractListener {
         }
 
         listen<PlayerPortalEvent> {
-            it.isCancelled = true
-            it.player.actionBar(Localization.getMessage("buildsystem.portalDisabled", getByPlayer(it.player)))
+            if (Settings.portal) {
+                it.isCancelled = true
+                it.player.actionBar(Localization.getMessage("buildsystem.portalDisabled", getByPlayer(it.player)))
+            }
         }
     }
 }

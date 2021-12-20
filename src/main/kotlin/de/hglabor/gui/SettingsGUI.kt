@@ -167,7 +167,7 @@ class SettingsGUI {
         return itemStack(Material.END_PORTAL_FRAME) {
             meta {
                 flag(ItemFlag.HIDE_ATTRIBUTES)
-                name = "${KColors.YELLOW}PORTALS"
+                name = "${KColors.YELLOW}DISABLE PORTALS"
                 addLore {
                     +""
                     +"${KColors.GRAY}current: ${if (Settings.portal) "${KColors.GREEN}ON" else "${KColors.RED}OFF"}"
