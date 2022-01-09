@@ -7,10 +7,13 @@ plugins {
     kotlin("jvm") version "1.6.10"
     id("com.github.johnrengelman.shadow") version "7.1.1"
     kotlin("plugin.serialization") version "1.6.10"
+    id("net.minecrell.plugin-yml.bukkit") version "0.5.1"
 }
 
+val mcVersion = "1.18.1"
+
 group = "de.hglabor"
-version = "1.18.1_v1"
+version = "${mcVersion}_v1"
 
 repositories {
     mavenCentral()
@@ -22,7 +25,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    compileOnly("org.spigotmc", "spigot", "1.18.1-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc", "spigot", "${mcVersion}-R0.1-SNAPSHOT")
     implementation("net.axay", "kspigot", "1.16.29")
     implementation("net.kyori", "adventure-api", "4.9.3")
     implementation("dev.jcsoftware", "JScoreboards", "2.1.2-RELEASE")
@@ -46,4 +49,16 @@ tasks {
 
 fun ShadowJar.simpleRelocate(pattern: String) {
     relocate(pattern, "${project.group}.${project.name.toLowerCase()}.shadow.$pattern")
+}
+
+bukkit {
+    name = "BuildSystem"
+    main = "de.hglabor.BuildSystem"
+    version = mcVersion
+    apiVersion = "1.18"
+    authors = listOf("polylymer")
+    commands {
+        register("skull") {}
+        register("settings") {}
+    }
 }
